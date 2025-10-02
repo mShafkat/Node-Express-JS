@@ -36,5 +36,7 @@ app.get('/user', (req, res) => {
     res.render('user');
 });
 
-
+app.get('/download', (req, res) => {
+    res.download('./files/Assignment-1.pdf', 'MyAssignment.pdf');
+});
 
