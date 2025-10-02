@@ -6,6 +6,8 @@ app.listen(3000, () => {
     console.log('Succesfully run on port 3000!');
 });
 
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
     const users = [
         {id: 1 , name: 'x'},
@@ -25,6 +27,14 @@ app.get('/', (req, res) => {
 //     const age = req.query.age;
 //     res.send(`Search results for name : ${name}, age : ${age}`);
 // });
+
+app.get('/about', (req, res) => {
+    res.redirect(303, 'https://www.google.com');
+});
+
+app.get('/user', (req, res) => {
+    res.render('user');
+});
 
 
 
