@@ -1,0 +1,18 @@
+<%- include('header') %>
+        <div class="row mb-5">
+            <div class="col-6">
+                <h4><%= title %></h4>
+    <table class="table" >
+        <% items.forEach(item => { %>
+        <tr>
+            <td><%= item.name %></td>
+            <td><%= item.age %></td>
+        </tr> <% }) %>
+    </table>
+    <div class="col-6">
+                <img src="image.webp" alt="About Image" class="img-fluid rounded">
+            </div>
+
+    </div>
+            </div>
+<%- include('footer') %>
