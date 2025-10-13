@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
-app.set('layout', './layouts/main');
+app.set('layout','layout');
 
 // view engine
 app.set('view engine', 'ejs');
@@ -24,10 +24,15 @@ mongoose.connect(process.env.MONGODB_URL, {
 }).then(() => console.log('Connected to MongoDB'))
   .catch(err => console.log('MongoDB connection error:', err));
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
 
+// routes
+app.use('/', require('./routes/frontend'));
+
+app.use('/admin', (res,req,next)=>{
+  res.locals.layout = 'admin/layout';
+  next();
+});
+app.use('/admin', require('./routes/admin'));
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

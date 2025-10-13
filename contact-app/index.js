@@ -1,16 +1,23 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+const Contact = require('./models/constacts.models');
+
+//mongodb connection
+mongoose.connect( 'mongodb://127.0.0.1:27017/contact-crud')
+.then(() => console.log('Connected to MongoDB'))
 
 
-//middlewires
+//middlewares
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 
 //routes
-app.get('/', (req, res) => {
-    res.render('home');
+app.get('/',async (req, res) => {
+    const contacts = await Contact.find();
+    res.render('home', { contacts });
 });
 
 app.get('/show-contact', (req, res) => {
